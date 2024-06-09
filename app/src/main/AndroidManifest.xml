@@ -21,10 +21,10 @@
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/Theme.Farm_UP.Fullscreen" />
         <activity
-            android:name=".farmer_details"
+            android:name=".FarmerDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".home"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

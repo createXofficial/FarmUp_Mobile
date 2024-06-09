@@ -1,4 +1,4 @@
-package com.example.farm_up;
+package com.example.farm_up.model.entity;
 
 import com.google.gson.annotations.SerializedName;
 

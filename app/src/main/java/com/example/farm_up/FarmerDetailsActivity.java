@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class farmer_details extends AppCompatActivity {
+public class FarmerDetailsActivity extends AppCompatActivity {
 
     CardView weatherCard, diseaseCard, pestCard;
 

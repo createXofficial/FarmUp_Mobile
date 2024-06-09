@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.farm_up.model.entity.Farmer;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerView
             String farmerImageUrl = farmer.getImageUrl();
 
             // Create an Intent to start the next activity
-            Intent intent = new Intent(v.getContext(), farmer_details.class);
+            Intent intent = new Intent(v.getContext(), FarmerDetailsActivity.class);
             intent.putExtra("farmer_name", farmerName);
             intent.putExtra("farmer_bio", farmerBio);
             intent.putExtra("farmer_image_url", farmerImageUrl);

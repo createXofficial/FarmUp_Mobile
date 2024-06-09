@@ -10,13 +10,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.farm_up.model.entity.Farmer;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     ArrayList<Farmer> farmers = new ArrayList<>();
     RecyclerView recyclerView;
 
