@@ -1,4 +1,4 @@
-package com.example.farm_up.view.adapter;
+package com.createx.farmup.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.farm_up.R;
-import com.example.farm_up.model.entity.Farmer;
-import com.example.farm_up.view.FarmerDetailsActivity;
+import com.createx.farmup.R;
+import com.createx.farmup.model.Farmer;
+import com.createx.farmup.view.FarmerDetailsActivity;
 
 import java.util.ArrayList;
 

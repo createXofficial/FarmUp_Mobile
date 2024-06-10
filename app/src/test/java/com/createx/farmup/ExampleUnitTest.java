@@ -1,4 +1,4 @@
-package com.example.farm_up;
+package com.createx.farmup;
 
 import org.junit.Test;
 
