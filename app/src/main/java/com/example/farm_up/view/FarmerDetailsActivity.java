@@ -1,4 +1,4 @@
-package com.example.farm_up;
+package com.example.farm_up.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.farm_up.R;
 
 public class FarmerDetailsActivity extends AppCompatActivity {
 
@@ -53,7 +55,7 @@ public class FarmerDetailsActivity extends AppCompatActivity {
     private void dispatchTakeVideoIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+            startActivityIfNeeded(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
         }
         else {
             //display error state to the user

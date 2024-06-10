@@ -11,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.farm_up.model.entity.Farmer;
+import com.example.farm_up.view.adapter.FarmerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     ArrayList<Farmer> farmers = new ArrayList<>();
     RecyclerView recyclerView;
 
@@ -26,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
 
         // Add some test data
         farmers.add(new Farmer("Farmer 1", "Farmer 1 Bio", R.drawable.farmer));
