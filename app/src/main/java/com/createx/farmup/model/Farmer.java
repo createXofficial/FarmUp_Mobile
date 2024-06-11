@@ -75,7 +75,10 @@ public class Farmer {
         if (this == o) return true;
         if (!(o instanceof Farmer)) return false;
         Farmer farmer = (Farmer) o;
-        return images == farmer.images && Objects.equals(name, farmer.name) && Objects.equals(bio, farmer.bio) && Objects.equals(imageUrl, farmer.imageUrl);
+        return images == farmer.images
+                && Objects.equals(name, farmer.name)
+                && Objects.equals(bio, farmer.bio)
+                && Objects.equals(imageUrl, farmer.imageUrl);
     }
 
     @Override

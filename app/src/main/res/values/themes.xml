@@ -7,5 +7,32 @@
 
     <style name="Theme.Farm_Up" parent="Base.Theme.Farm_Up">
         <item name="fontFamily">@font/oneuisans</item>
+        <item name="android:fontFamily">@font/oneuisans</item>
+    </style>
+
+    <style name="TextAppearance.App.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/oneuisans</item>
+        <item name="android:fontFamily">@font/oneuisans</item>
+    </style>
+
+    <style name="TextAppearance.App.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/oneuisans</item>
+        <item name="android:fontFamily">@font/oneuisans</item>
+    </style>
+
+    <style name="TextAppearance.App.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">@font/oneuisans</item>
+        <item name="android:fontFamily">@font/oneuisans</item>
+    </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+        <item name="titleTextAppearance">@style/TextAppearance.App.TitleLarge</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.App.TitleMedium</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
     </style>
 </resources>
