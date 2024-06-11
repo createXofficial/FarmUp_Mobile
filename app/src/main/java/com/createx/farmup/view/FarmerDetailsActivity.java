@@ -1,9 +1,10 @@
-package com.example.farm_up;
+package com.createx.farmup.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -13,12 +14,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class farmer_details extends AppCompatActivity {
+import com.createx.farmup.R;
 
+public class FarmerDetailsActivity extends AppCompatActivity {
     CardView weatherCard, diseaseCard, pestCard;
+    public static final int REQUEST_VIDEO_CAPTURE = 1;
 
-
-    @SuppressLint("QueryPermissionsNeeded")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,28 +35,21 @@ public class farmer_details extends AppCompatActivity {
         diseaseCard = findViewById(R.id.disease_card);
         pestCard = findViewById(R.id.pest_card);
 
-
-        weatherCard.setOnClickListener(v -> {
-
-
-
-            // Handle weather card click
-            dispatchTakeVideoIntent();
+        weatherCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle weather card click
+                dispatchTakeVideoIntent();
+            }
         });
-
-
-
-
-
     }
-    static final int REQUEST_VIDEO_CAPTURE = 1;
+
     @SuppressLint("QueryPermissionsNeeded")
     private void dispatchTakeVideoIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-        }
-        else {
+            startActivityIfNeeded(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+        } else {
             //display error state to the user
             Toast.makeText(this, "Unable to open camera", Toast.LENGTH_SHORT).show();
         }

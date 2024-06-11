@@ -1,6 +1,10 @@
-package com.example.farm_up;
+package com.createx.farmup.model;
+
+import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Objects;
 
 public class Farmer {
     @SerializedName("name")
@@ -55,5 +59,27 @@ public class Farmer {
         this.images = images;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Farmer{" +
+                "name='" + name + '\'' +
+                ", bio='" + bio + '\'' +
+                ", images=" + images +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Farmer)) return false;
+        Farmer farmer = (Farmer) o;
+        return images == farmer.images && Objects.equals(name, farmer.name) && Objects.equals(bio, farmer.bio) && Objects.equals(imageUrl, farmer.imageUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, bio, images, imageUrl);
+    }
 }

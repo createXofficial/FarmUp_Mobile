@@ -5,8 +5,7 @@
     android:id="@+id/farmer_bio"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".farmer_details">
-
+    tools:context=".view.FarmerDetailsActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -235,6 +234,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </LinearLayout>

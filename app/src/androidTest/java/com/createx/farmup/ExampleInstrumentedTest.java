@@ -1,4 +1,4 @@
-package com.example.farm_up;
+package com.createx.farmup;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.farm_up", appContext.getPackageName());
+        assertEquals("com.createx.farm_up", appContext.getPackageName());
     }
 }

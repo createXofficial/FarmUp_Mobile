@@ -1,4 +1,4 @@
-package com.example.farm_up;
+package com.createx.farmup.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.createx.farmup.R;
+import com.createx.farmup.model.Farmer;
+import com.createx.farmup.view.FarmerDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -45,7 +48,7 @@ public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerView
             String farmerImageUrl = farmer.getImageUrl();
 
             // Create an Intent to start the next activity
-            Intent intent = new Intent(v.getContext(), farmer_details.class);
+            Intent intent = new Intent(v.getContext(), FarmerDetailsActivity.class);
             intent.putExtra("farmer_name", farmerName);
             intent.putExtra("farmer_bio", farmerBio);
             intent.putExtra("farmer_image_url", farmerImageUrl);
