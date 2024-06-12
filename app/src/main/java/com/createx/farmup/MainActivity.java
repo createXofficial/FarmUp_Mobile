@@ -15,7 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.createx.farmup.model.Farmer;
+import com.createx.farmup.model.entity.Farmer;
 import com.createx.farmup.view.adapter.FarmerAdapter;
 
 import org.json.JSONArray;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.farmer_list_view);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

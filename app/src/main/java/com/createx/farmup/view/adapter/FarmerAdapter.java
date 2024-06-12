@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.createx.farmup.R;
-import com.createx.farmup.model.Farmer;
+import com.createx.farmup.model.entity.Farmer;
 import com.createx.farmup.view.FarmerDetailsActivity;
 
 import java.util.ArrayList;
@@ -84,6 +84,10 @@ public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerView
                     .load(farmer.getImageUrl())
                     .into(farmerImage);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Farmer farmer);
     }
 }
 

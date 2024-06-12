@@ -8,15 +8,17 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.createx.farmup.R;
+import com.createx.farmup.databinding.ActivityFarmerDetailsBinding;
+import com.createx.farmup.model.entity.Farmer;
 
 public class FarmerDetailsActivity extends AppCompatActivity {
-    CardView weatherCard, diseaseCard, pestCard;
+    ActivityFarmerDetailsBinding binding;
     public static final int REQUEST_VIDEO_CAPTURE = 1;
 
     @Override
@@ -30,12 +32,23 @@ public class FarmerDetailsActivity extends AppCompatActivity {
             return insets;
         });
 
-        weatherCard = findViewById(R.id.weather_card);
-        diseaseCard = findViewById(R.id.disease_card);
-        pestCard = findViewById(R.id.pest_card);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_farmer_details);
+        Farmer farmer = new Farmer();
+        binding.setFarmer(farmer);
 
-        weatherCard.setOnClickListener(v -> {
+
+        binding.weatherCard.setOnClickListener(v -> {
             // Handle weather card click
+            dispatchTakeVideoIntent();
+        });
+
+        binding.diseaseCard.setOnClickListener(v -> {
+            // Handle disease card click
+            dispatchTakeVideoIntent();
+        });
+
+        binding.pestCard.setOnClickListener(v -> {
+            // Handle pest card click
             dispatchTakeVideoIntent();
         });
     }
