@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Add some test data
-        farmers.add(new Farmer("Farmer 1", "Farmer 1 Bio", R.drawable.farmer));
-        farmers.add(new Farmer("Farmer 2", "Farmer 2 Bio", R.drawable.farmer));
-        farmers.add(new Farmer("Farmer 3", "Farmer 3 Bio", R.drawable.farmer));
+//        // Add some test data
+//        farmers.add(new Farmer("Farmer 1", "Farmer 1 Bio", R.drawable.farmer));
+//        farmers.add(new Farmer("Farmer 2", "Farmer 2 Bio", R.drawable.farmer));
+//        farmers.add(new Farmer("Farmer 3", "Farmer 3 Bio", R.drawable.farmer));
 
         init();
         requestJsonData();

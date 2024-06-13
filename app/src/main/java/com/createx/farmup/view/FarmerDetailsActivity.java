@@ -4,10 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -16,6 +20,8 @@ import androidx.databinding.DataBindingUtil;
 import com.createx.farmup.R;
 import com.createx.farmup.databinding.ActivityFarmerDetailsBinding;
 import com.createx.farmup.model.entity.Farmer;
+
+import java.util.Objects;
 
 public class FarmerDetailsActivity extends AppCompatActivity {
     ActivityFarmerDetailsBinding binding;
@@ -36,6 +42,12 @@ public class FarmerDetailsActivity extends AppCompatActivity {
         Farmer farmer = new Farmer();
         binding.setFarmer(farmer);
 
+        Toolbar toolbar = binding.toolbar;
+        setSupportActionBar(toolbar);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         binding.weatherCard.setOnClickListener(v -> {
             // Handle weather card click
@@ -51,6 +63,20 @@ public class FarmerDetailsActivity extends AppCompatActivity {
             // Handle pest card click
             dispatchTakeVideoIntent();
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_app_bar_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @SuppressLint("QueryPermissionsNeeded")
