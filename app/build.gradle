@@ -47,7 +47,7 @@ dependencies {
     implementation libs.logging.interceptor
     implementation libs.volley
     implementation libs.circleimageview  // for circular ImageView
-//    implementation libs.photoview  // for pinch-to-zoom
+    implementation libs.photoview  // for pinch-to-zoom
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-//        // Add some test data
-//        farmers.add(new Farmer("Farmer 1", "Farmer 1 Bio", R.drawable.farmer));
-//        farmers.add(new Farmer("Farmer 2", "Farmer 2 Bio", R.drawable.farmer));
-//        farmers.add(new Farmer("Farmer 3", "Farmer 3 Bio", R.drawable.farmer));
+        // Add some test data
+        farmers.add(new Farmer("Farmer 1", "Farmer 1 Bio", R.drawable.farmer));
+        farmers.add(new Farmer("Farmer 2", "Farmer 2 Bio", R.drawable.farmer));
+        farmers.add(new Farmer("Farmer 3", "Farmer 3 Bio", R.drawable.farmer));
 
         init();
         requestJsonData();
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public void init() {
         recyclerView = findViewById(R.id.farmer_list_view);
         recyclerView.hasFixedSize();
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }

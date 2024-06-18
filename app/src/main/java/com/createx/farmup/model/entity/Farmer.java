@@ -1,10 +1,14 @@
 package com.createx.farmup.model.entity;
 
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.library.baseAdapters.BR;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
@@ -23,6 +27,15 @@ public class Farmer extends BaseObservable {
 
     @SerializedName("images_url")
     private String imageUrl;
+
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView imageView, String url) {
+        String imagePath = "";
+        Glide.with(imageView.getContext())
+                .load(imagePath)
+                .into(imageView);
+    }
+
 
     public Farmer() {}
 
