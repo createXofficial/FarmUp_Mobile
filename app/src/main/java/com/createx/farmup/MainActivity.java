@@ -100,7 +100,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("response error", "onResponse: ", e );
             }
         }
-        FarmerAdapter adapter = new FarmerAdapter(this,farmers);
+        FarmerAdapter adapter = new FarmerAdapter(this);
+        adapter.setFarmers(farmers);
+
+        adapter.setListener(farmer -> {
+
+        });
         recyclerView.setAdapter(adapter);
     }
 }

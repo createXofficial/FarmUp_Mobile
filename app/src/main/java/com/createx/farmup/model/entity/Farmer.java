@@ -9,23 +9,30 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.library.baseAdapters.BR;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 public class Farmer extends BaseObservable {
     @SerializedName("id")
+    @Expose
     private long id;
+
     @SerializedName("name")
+    @Expose
     private String name;
 
     @SerializedName("bio")
+    @Expose
     private String bio;
 
     @SerializedName("images")
+    @Expose
     private int images;
 
     @SerializedName("images_url")
+    @Expose
     private String imageUrl;
 
     @BindingAdapter({"imageUrl"})

@@ -1,34 +1,29 @@
 package com.createx.farmup.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.createx.farmup.R;
 import com.createx.farmup.databinding.MainBinding;
 import com.createx.farmup.model.entity.Farmer;
-import com.createx.farmup.view.FarmerDetailsActivity;
 
 import java.util.ArrayList;
 
 public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerViewHolder> {
     private OnFarmerItemClickListener listener;
     private final Context context;
-    private final ArrayList<Farmer> farmers;
+    private ArrayList<Farmer> farmers;
 
     // Provide a suitable constructor
-    public FarmerAdapter(Context context, ArrayList<Farmer> farmers) {
+    public FarmerAdapter(Context context) {
         this.context = context;
-        this.farmers = farmers;
     }
 
     // Create new views
@@ -42,6 +37,14 @@ public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerView
                 false
         );
         return new FarmerViewHolder(mainBinding);
+    }
+
+    public void setFarmers(ArrayList<Farmer> newFarmers) {
+        final DiffUtil.DiffResult result =
+                DiffUtil.calculateDiff(new FarmerDiffCallback(farmers, newFarmers), false);
+
+        farmers = newFarmers;
+        result.dispatchUpdatesTo(FarmerAdapter.this);
     }
 
     // Replace the contents of a view
@@ -88,11 +91,11 @@ public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerView
             });
         }
 
-        public void bindImage(int image) {
-            Glide.with(mainBinding.farmerImage.getContext())
-                    .load(image)
-                    .into(mainBinding.farmerImage);
-        }
+//        public void bindImage(int image) {
+//            Glide.with(mainBinding.farmerImage.getContext())
+//                    .load(image)
+//                    .into(mainBinding.farmerImage);
+//        }
 
 //        public void bind(Farmer farmer) {
 //            farmerName.setText(farmer.getName());
