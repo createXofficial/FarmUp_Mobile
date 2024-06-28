@@ -28,7 +28,7 @@ public class FarmerDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldFarmers.get(oldItemPosition).getId() == newFarmers.get(newItemPosition).getId();
+        return oldFarmers.get(oldItemPosition).getFarmerId() == newFarmers.get(newItemPosition).getFarmerId();
     }
 
     @Override

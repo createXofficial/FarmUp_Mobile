@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setFarmers(farmers);
 
         adapter.setListener(farmer -> {
-            long selectedFarmerId = farmer.getId();
+            long selectedFarmerId = farmer.getFarmerId();
             Intent intent = new Intent(this, FarmerDetailsActivity.class);
 
             intent.putExtra(FARMER_ID, selectedFarmerId);

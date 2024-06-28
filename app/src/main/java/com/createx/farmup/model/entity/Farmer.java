@@ -1,14 +1,10 @@
 package com.createx.farmup.model.entity;
 
-import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.library.baseAdapters.BR;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -17,7 +13,7 @@ import java.util.Objects;
 public class Farmer extends BaseObservable {
     @SerializedName("id")
     @Expose
-    private long id;
+    private long farmerId;
 
     @SerializedName("name")
     @Expose
@@ -47,7 +43,7 @@ public class Farmer extends BaseObservable {
     public Farmer() {}
 
     public Farmer(String name, String bio, int image) {
-        this.id = 0;
+        this.farmerId = 0;
         this.name = name;
         this.bio = bio;
         this.image = image;
@@ -55,13 +51,13 @@ public class Farmer extends BaseObservable {
 
     // getters and setters
     @Bindable
-    public long getId() {
-        return id;
+    public long getFarmerId() {
+        return farmerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
-        notifyPropertyChanged(BR.id);
+    public void setFarmerId(long id) {
+        this.farmerId = id;
+        notifyPropertyChanged(BR.farmerId);
     }
 
     @Bindable
@@ -108,7 +104,7 @@ public class Farmer extends BaseObservable {
     @Override
     public String toString() {
         return "Farmer{" +
-                "id=" + id +
+                "farmerId=" + farmerId +
                 "name='" + name + '\'' +
                 ", bio='" + bio + '\'' +
                 ", image=" + image +
@@ -121,7 +117,7 @@ public class Farmer extends BaseObservable {
         if (this == o) return true;
         if (!(o instanceof Farmer)) return false;
         Farmer farmer = (Farmer) o;
-        return id == farmer.id
+        return farmerId == farmer.farmerId
                 && image == farmer.image
                 && Objects.equals(name, farmer.name)
                 && Objects.equals(bio, farmer.bio)
@@ -130,6 +126,6 @@ public class Farmer extends BaseObservable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, bio, image, imageUrl);
+        return Objects.hash(farmerId, name, bio, image, imageUrl);
     }
 }
