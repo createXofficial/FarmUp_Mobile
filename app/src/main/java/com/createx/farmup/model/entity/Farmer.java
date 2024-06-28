@@ -29,28 +29,28 @@ public class Farmer extends BaseObservable {
 
     @SerializedName("images")
     @Expose
-    private int images;
+    private int image;
 
     @SerializedName("images_url")
     @Expose
     private String imageUrl;
 
-    @BindingAdapter({"imageUrl"})
-    public static void loadImage(ImageView imageView, String url) {
-        String imagePath = "";
-        Glide.with(imageView.getContext())
-                .load(imagePath)
-                .into(imageView);
-    }
+//    @BindingAdapter({"imageUrl"})
+//    public static void loadImage(ImageView imageView, String url) {
+//        String imagePath = "";
+//        Glide.with(imageView.getContext())
+//                .load(imagePath)
+//                .into(imageView);
+//    }
 
 
     public Farmer() {}
 
-    public Farmer(String name, String bio, int images) {
+    public Farmer(String name, String bio, int image) {
         this.id = 0;
         this.name = name;
         this.bio = bio;
-        this.images = images;
+        this.image = image;
     }
 
     // getters and setters
@@ -96,11 +96,11 @@ public class Farmer extends BaseObservable {
 
     @Bindable
     public int getImage() {
-        return images;
+        return image;
     }
 
-    public void setImage(int images) {
-        this.images = images;
+    public void setImage(int image) {
+        this.image = image;
         notifyPropertyChanged(BR.image);
     }
 
@@ -111,7 +111,7 @@ public class Farmer extends BaseObservable {
                 "id=" + id +
                 "name='" + name + '\'' +
                 ", bio='" + bio + '\'' +
-                ", images=" + images +
+                ", image=" + image +
                 ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
@@ -122,7 +122,7 @@ public class Farmer extends BaseObservable {
         if (!(o instanceof Farmer)) return false;
         Farmer farmer = (Farmer) o;
         return id == farmer.id
-                && images == farmer.images
+                && image == farmer.image
                 && Objects.equals(name, farmer.name)
                 && Objects.equals(bio, farmer.bio)
                 && Objects.equals(imageUrl, farmer.imageUrl);
@@ -130,6 +130,6 @@ public class Farmer extends BaseObservable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, bio, images, imageUrl);
+        return Objects.hash(id, name, bio, image, imageUrl);
     }
 }

@@ -17,6 +17,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.createx.farmup.R;
 import com.createx.farmup.databinding.ActivityFarmerDetailsBinding;
 import com.createx.farmup.model.entity.Farmer;
@@ -26,6 +29,10 @@ import java.util.Objects;
 public class FarmerDetailsActivity extends AppCompatActivity {
     ActivityFarmerDetailsBinding binding;
     public static final int REQUEST_VIDEO_CAPTURE = 1;
+    public static final String FARMER_ID = "farmer_id";
+    public static final String FARMER_IMAGE = "farmer_image";
+    public static final String FARMER_NAME = "farmer_name";
+    public static final String FARMER_BIO = "farmer_bio";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,20 @@ public class FarmerDetailsActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(FARMER_ID)) {
+            farmer.setName(intent.getStringExtra(FARMER_NAME));
+            Glide.with(this)
+                            .load(intent.getIntExtra(FARMER_IMAGE, R.drawable.farmer))
+                            .apply(new RequestOptions().circleCrop())
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .skipMemoryCache(false)
+                            .into(binding.profileImage);
+            farmer.setBio(intent.getStringExtra(FARMER_BIO));
+        } else {
+            Toast.makeText(this, "No data sent", Toast.LENGTH_LONG).show();
+        }
 
 
         binding.weatherCard.setOnClickListener(v -> {

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.createx.farmup.R;
 import com.createx.farmup.databinding.MainBinding;
 import com.createx.farmup.model.entity.Farmer;
@@ -50,8 +52,9 @@ public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerView
     // Replace the contents of a view
     @Override
     public void onBindViewHolder(@NonNull FarmerViewHolder holder, int position) {
-        Farmer farmer = farmers.get(position);
-        holder.mainBinding.setFarmer(farmer);
+        Farmer currentFarmer = farmers.get(position);
+        holder.mainBinding.setFarmer(currentFarmer);
+        holder.bindImage(currentFarmer.getImage());
 //        holder.bind(farmer);
 //        holder.itemView.setOnClickListener(v -> {
 //            // Get the data associated with the clicked item
@@ -91,11 +94,14 @@ public class FarmerAdapter extends RecyclerView.Adapter<FarmerAdapter.FarmerView
             });
         }
 
-//        public void bindImage(int image) {
-//            Glide.with(mainBinding.farmerImage.getContext())
-//                    .load(image)
-//                    .into(mainBinding.farmerImage);
-//        }
+        public void bindImage(int image) {
+            Glide.with(mainBinding.farmerImage.getContext())
+                    .load(image)
+                    .apply(new RequestOptions().circleCrop())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(false)
+                    .into(mainBinding.farmerImage);
+        }
 
 //        public void bind(Farmer farmer) {
 //            farmerName.setText(farmer.getName());
