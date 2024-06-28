@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bar">#144D32</color>
+
+    <!--Light mode colors-->
+    <color name="bar">#38B34A</color>
+    <color name="light_yellow">#FDE0AC</color>
+    <color name="textBlack">#333333</color>
+    <color name="accent">#FFC107</color>
+    <color name="gray_light">#DDDDDD</color>
+
+    <!--Dark mode colors-->
+    <color name="dark_green">#007A33</color>
+    <color name="mustard_yellow">#FFD7A0</color>
+    <color name="background_dark">#121212</color>
+    <color name="dark_orange">#FF9800</color>
+    <color name="gray_dark">#212121</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#FFFCFC</color>
