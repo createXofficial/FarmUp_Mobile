@@ -1,7 +1,18 @@
 package com.createx.farmup.view;
 
 import android.annotation.SuppressLint;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -20,15 +31,24 @@ import androidx.databinding.DataBindingUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+
 import com.createx.farmup.R;
 import com.createx.farmup.databinding.ActivityFarmerDetailsBinding;
 import com.createx.farmup.model.entity.Farmer;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class FarmerDetailsActivity extends AppCompatActivity {
     ActivityFarmerDetailsBinding binding;
     public static final int REQUEST_VIDEO_CAPTURE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 2;
     public static final String FARMER_ID = "farmer_id";
     public static final String FARMER_IMAGE = "farmer_image";
     public static final String FARMER_NAME = "farmer_name";
@@ -72,17 +92,17 @@ public class FarmerDetailsActivity extends AppCompatActivity {
 
         binding.weatherCard.setOnClickListener(v -> {
             // Handle weather card click
-            dispatchTakeVideoIntent();
+            dispatchTakeMediaIntent();
         });
 
         binding.diseaseCard.setOnClickListener(v -> {
             // Handle disease card click
-            dispatchTakeVideoIntent();
+            dispatchTakeMediaIntent();
         });
 
         binding.pestCard.setOnClickListener(v -> {
             // Handle pest card click
-            dispatchTakeVideoIntent();
+            dispatchTakeMediaIntent();
         });
     }
 
@@ -101,13 +121,80 @@ public class FarmerDetailsActivity extends AppCompatActivity {
     }
 
     @SuppressLint("QueryPermissionsNeeded")
-    private void dispatchTakeVideoIntent() {
-        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityIfNeeded(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-        } else {
-            //display error state to the user
-            Toast.makeText(this, "Unable to open camera", Toast.LENGTH_SHORT).show();
+    private void dispatchTakeMediaIntent() {
+        final CharSequence[] options = { "Take Photo", "Record Video", "Cancel" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose your action");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo")) {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
+                } else if (options[item].equals("Record Video")) {
+                    Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                    if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+                    }
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private static final Logger LOGGER = Logger.getLogger(FarmerDetailsActivity.class.getName());
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            assert extras != null;
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // Save the bitmap to a file
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            String imageFileName = "JPEG_" + timeStamp + ".jpg";
+            try {
+                OutputStream fOut = null;
+                File file = new File(getExternalFilesDir(null), imageFileName); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
+                fOut = Files.newOutputStream(file.toPath());
+
+                assert imageBitmap != null;
+                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
+                fOut.flush(); // Not really required
+                fOut.close(); // do not forget to close the stream
+
+                MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Error saving image", e);
+            }
+        } else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+            Uri videoUri = data.getData();
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            String videoFileName = "VID_" + timeStamp + ".mp4";
+            try {
+                assert videoUri != null;
+                InputStream inputStream = getContentResolver().openInputStream(videoUri);
+                OutputStream outputStream = Files.newOutputStream(new File(getExternalFilesDir(null), videoFileName).toPath());
+                byte[] buffer = new byte[1024];
+                int length;
+                while (true) {
+                    assert inputStream != null;
+                    if (!((length = inputStream.read(buffer)) > 0)) break;
+                    outputStream.write(buffer, 0, length);
+                }
+                outputStream.flush();
+                outputStream.close();
+                inputStream.close();
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE, "Error saving video", e);
+            }
         }
     }
+
 }
