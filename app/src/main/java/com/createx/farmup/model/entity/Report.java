@@ -6,6 +6,7 @@ import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ public class Report extends BaseObservable {
         this.content = content;
     }
 
+    @Ignore
     public Report() {}
 
     @Bindable
