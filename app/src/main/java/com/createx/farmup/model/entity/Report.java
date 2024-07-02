@@ -33,13 +33,13 @@ public class Report extends BaseObservable {
     public Report() {}
 
     @Bindable
-    public Integer getId() {
+    public Integer getReportId() {
         return reportId;
     }
 
-    public void setId(Integer id) {
+    public void setReportId(Integer id) {
         this.reportId = id;
-        notifyPropertyChanged(BR.id);
+        notifyPropertyChanged(BR.reportId);
     }
 
     @Bindable

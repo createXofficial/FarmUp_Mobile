@@ -29,7 +29,7 @@ public class ReportDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return Objects.equals(oldReports.get(oldItemPosition).getId(), newReports.get(newItemPosition).getId());
+        return Objects.equals(oldReports.get(oldItemPosition).getReportId(), newReports.get(newItemPosition).getReportId());
     }
 
     @Override
