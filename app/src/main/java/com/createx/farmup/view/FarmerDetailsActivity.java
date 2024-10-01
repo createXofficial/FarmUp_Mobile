@@ -3,11 +3,9 @@ package com.createx.farmup.view;
 import android.annotation.SuppressLint;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,22 +124,19 @@ public class FarmerDetailsActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose your action");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                    }
-                } else if (options[item].equals("Record Video")) {
-                    Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                    if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-                    }
-                } else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Take Photo")) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityIfNeeded(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
+            } else if (options[item].equals("Record Video")) {
+                Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityIfNeeded(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+                }
+            } else if (options[item].equals("Cancel")) {
+                dialog.dismiss();
             }
         });
         builder.show();
@@ -160,7 +155,7 @@ public class FarmerDetailsActivity extends AppCompatActivity {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
             String imageFileName = "JPEG_" + timeStamp + ".jpg";
             try {
-                OutputStream fOut = null;
+                OutputStream fOut;
                 File file = new File(getExternalFilesDir(null), imageFileName); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
                 fOut = Files.newOutputStream(file.toPath());
 
